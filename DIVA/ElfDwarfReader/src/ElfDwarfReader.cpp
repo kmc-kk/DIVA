@@ -526,8 +526,14 @@ void DwarfReader::initTypeFromAttrs(LibScopeView::Type &Ty,
 
 void DwarfReader::initSymbolFromAttrs(LibScopeView::Symbol &Sym,
                                       const DwarfDie &Die) {
-  if (Sym.getIsMember())
+  if (Sym.getIsMember()) {
     Sym.setAccessSpecifier(getAccessSpecifier(Die));
+  
+    DwarfAttrValue Location(
+        getAttrExpectingKind(Die, DW_AT_data_member_location, DwarfAttrValueKind::Unsigned));
+    if (!Location.empty())
+      Sym.setLocation(Location.getUnsigned());
+  }
 }
 
 void DwarfReader::createLines(const DwarfDie &CUDie,

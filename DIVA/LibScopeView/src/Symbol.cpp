@@ -123,6 +123,12 @@ std::string Symbol::getAsYAML() const {
     Attrs << '"';
   }
 
+  auto Loc = getLocation();
+  if (Loc != -1) {
+      Attrs << "\n  location: ";
+      Attrs << Loc;
+  }
+
   // TODO: Uncomment and test once static is set by reader.
   // if (getIsMember())
   //   Attrs << "\n  static: " << (Sym->getIsStatic() ? "true" : "false");

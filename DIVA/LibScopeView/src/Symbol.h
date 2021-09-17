@@ -54,6 +54,7 @@ private:
     SymbolAttributesSize
   };
   std::bitset<SymbolAttributesSize> SymbolAttributesFlags;
+  Dwarf_Unsigned Location = -1;
 
 public:
   bool getIsMember() const { return SymbolAttributesFlags[IsMember]; }
@@ -61,6 +62,9 @@ public:
 
   bool getIsParameter() const { return SymbolAttributesFlags[IsParameter]; }
   void setIsParameter() { SymbolAttributesFlags.set(IsParameter); }
+
+  void setLocation(Dwarf_Unsigned loc) { Location = loc; }
+  Dwarf_Unsigned getLocation(void) const { return Location; }
 
   bool getIsUnspecifiedParameter() const {
     return SymbolAttributesFlags[IsSpecifiedParameter];
