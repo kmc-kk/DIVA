@@ -54,7 +54,7 @@ private:
     SymbolAttributesSize
   };
   std::bitset<SymbolAttributesSize> SymbolAttributesFlags;
-  Dwarf_Unsigned Location = -1;
+  Dwarf_Unsigned Location = static_cast<Dwarf_Unsigned>(-1);
 
 public:
   bool getIsMember() const { return SymbolAttributesFlags[IsMember]; }
